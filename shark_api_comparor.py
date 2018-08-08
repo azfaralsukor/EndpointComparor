@@ -13,7 +13,7 @@ headers = {'apikey': 'SuFH7x5V2v', 'UserKey': userkey}
 totalprojectcount = 365 # SELECT MAX(ProjectId) FROM ProjectTbl; +1
 id = 0
 startid = 1
-failed = [13, 67, 132, 141, 179, 244, 267, 283, 359]
+failed = []
 
 print("Starting test...")
 print("Testing on address "+server, end="")

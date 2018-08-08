@@ -3,9 +3,10 @@ import re
 import time
 import os
 from subprocess import Popen
+import csv
+from operator import itemgetter
 
 start_time = time.time()
-Popen('python live_graph.py')
 server = 'http://127.0.0.1'
 userkey = '203.28d40838-f51f-4a78-9dbe-26ff07f74cb9'
 headers = {'apikey': 'SuFH7x5V2v', 'UserKey': userkey}
@@ -37,6 +38,7 @@ if id != 0:
 
 else:
     d_a=[]
+    Popen('python live_graph.py')
     if not failed:
         print(" with iteration of "+str(totalprojectcount-startid)+" times...")
         for x in range(startid,totalprojectcount):
@@ -52,6 +54,11 @@ else:
             if f == s:
                 file=open("data.csv", "a+")
                 file=file.write(str(len(f))+","+f_time+","+s_time+"\n")
+                with open('data.csv', 'r') as f:
+                    data = [line for line in csv.reader(f)]
+                data = sorted(data, key=lambda x:int(x[0])) 
+                with open('data.csv', 'w', newline='') as f:
+                    csv.writer(f).writerows(data)
                 print(' --- Identical')
             else:
                 d_a.append(x)
@@ -76,6 +83,11 @@ else:
                 if f == s:
                     file=open("data.csv", "a+")
                     file=file.write(str(len(f))+","+f_time+","+s_time+"\n")
+                    with open('data.csv', 'r') as f:
+                        data = [line for line in csv.reader(f)]
+                    data = sorted(data, key=lambda x:int(x[0])) 
+                    with open('data.csv', 'w', newline='') as f:
+                        csv.writer(f).writerows(data)
                     print(' --- Identical')
                 else:
                     d_a.append(failed[x])
@@ -86,6 +98,6 @@ else:
           print(x, end=" ")
         print("\n"+str(len(d_a))+" out of "+str(len(failed))+" projects failed. Your new endpoint is "+str((len(failed)-len(d_a))/(len(failed))*100)+"% accurate")
 
-os.system('python result_graph.py')
+Popen('python result_graph.py')
 print("Done. Exiting...")
 print("Elapsed time: "+time.strftime("%H:%M:%S", time.gmtime(time.time() - start_time)))

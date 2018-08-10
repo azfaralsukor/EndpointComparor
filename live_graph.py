@@ -22,6 +22,8 @@ def animate(i):
 	sp.clear()
 	sp.plot(xs, ys, label="old")
 	sp.plot(xs, zs, label="new")
+	plt.xlabel('Response Size (10 MB)')
+	plt.ylabel('Time Taken (ms)')
 	sp.legend()
 
 ani = animation.FuncAnimation(fig, animate, interval=1000)

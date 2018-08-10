@@ -14,5 +14,7 @@ for line in lines:
 		Z.append(int(z))
 plt.plot(X, Y, label="old")
 plt.plot(X, Z, label="new")
+plt.xlabel('Response Size (10 MB)')
+plt.ylabel('Time Taken (ms)')
 plt.legend()
 plt.show()
